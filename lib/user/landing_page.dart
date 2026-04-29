@@ -6,6 +6,8 @@ import 'package:classcare_user/theme/motion_tokens.dart';
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 
+  static const String routeName = '/Landing_page';
+
   @override
   State<LandingPage> createState() => _LandingPageState();
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:classcare_user/user/landing_page.dart';
 import 'package:classcare_user/user/splash_screen.dart';
 import 'package:classcare_user/theme/app_design_tokens.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
       darkTheme: _buildDarkTheme(),
       themeMode: ThemeMode.system,
       home: const SplashScreen(),
+      routes: {
+        LandingPage.routeName: (_) => const LandingPage(),
+      },
     );
   }
 
