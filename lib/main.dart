@@ -35,8 +35,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'ClassCare',
       theme: _buildLightTheme(),
-      darkTheme: _buildDarkTheme(),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       home: const SplashScreen(),
       routes: {
         LandingPage.routeName: (_) => const LandingPage(),
