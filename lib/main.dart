@@ -5,6 +5,7 @@ import 'package:classcare_user/user/landing_page.dart';
 import 'package:classcare_user/user/splash_screen.dart';
 import 'package:classcare_user/theme/app_design_tokens.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'dart:html' as html;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,18 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  String _getInitialRoute() {
+    try {
+      final path = html.window.location.pathname ?? '/';
+      // Remove leading slash and check for Landing_page
+      if (path.contains('Landing_page')) {
+        return LandingPage.routeName;
+      }
+    } catch (_) {}
+    // Default to home (SplashScreen)
+    return '/';
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,7 +50,9 @@ class MyApp extends StatelessWidget {
       theme: _buildLightTheme(),
       themeMode: ThemeMode.light,
       home: const SplashScreen(),
+      initialRoute: _getInitialRoute(),
       routes: {
+        '/': (_) => const SplashScreen(),
         LandingPage.routeName: (_) => const LandingPage(),
       },
     );
