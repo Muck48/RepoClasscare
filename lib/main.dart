@@ -42,6 +42,16 @@ class MyApp extends StatelessWidget {
     return '/';
   }
 
+  Route<dynamic>? _onGenerateRoute(RouteSettings settings) {
+    if (settings.name == LandingPage.routeName) {
+      return MaterialPageRoute(builder: (_) => const LandingPage());
+    }
+    if (settings.name == '/' || settings.name == null) {
+      return MaterialPageRoute(builder: (_) => const SplashScreen());
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,12 +59,8 @@ class MyApp extends StatelessWidget {
       title: 'ClassCare',
       theme: _buildLightTheme(),
       themeMode: ThemeMode.light,
-      home: const SplashScreen(),
       initialRoute: _getInitialRoute(),
-      routes: {
-        '/': (_) => const SplashScreen(),
-        LandingPage.routeName: (_) => const LandingPage(),
-      },
+      onGenerateRoute: _onGenerateRoute,
     );
   }
 
