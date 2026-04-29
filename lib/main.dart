@@ -5,7 +5,6 @@ import 'package:classcare_user/user/landing_page.dart';
 import 'package:classcare_user/user/splash_screen.dart';
 import 'package:classcare_user/theme/app_design_tokens.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'dart:html' as html;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,22 +31,31 @@ class MyApp extends StatelessWidget {
 
   String _getInitialRoute() {
     try {
-      final path = html.window.location.pathname ?? '/';
-      // Remove leading slash and check for Landing_page
-      if (path.contains('Landing_page')) {
+      final uri = Uri.base;
+      final pathSegments = uri.pathSegments;
+      // Check if Landing_page is in the path
+      if (pathSegments.contains('Landing_page') || uri.path.contains('Landing_page')) {
         return LandingPage.routeName;
       }
-    } catch (_) {}
+    } catch (_) {
+      debugPrint('Error detecting initial route');
+    }
     // Default to home (SplashScreen)
     return '/';
   }
 
   Route<dynamic>? _onGenerateRoute(RouteSettings settings) {
     if (settings.name == LandingPage.routeName) {
-      return MaterialPageRoute(builder: (_) => const LandingPage());
+      return MaterialPageRoute(
+        builder: (_) => const LandingPage(),
+        settings: settings,
+      );
     }
     if (settings.name == '/' || settings.name == null) {
-      return MaterialPageRoute(builder: (_) => const SplashScreen());
+      return MaterialPageRoute(
+        builder: (_) => const SplashScreen(),
+        settings: settings,
+      );
     }
     return null;
   }
