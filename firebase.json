@@ -6,6 +6,14 @@
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
+          "source": "/Landing_page",
+          "destination": "/Landing_page/index.html"
+        },
+        {
+          "source": "/Landing_page/**",
+          "destination": "/Landing_page/index.html"
+        },
+        {
           "source": "**",
           "destination": "/index.html"
         }
