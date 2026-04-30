@@ -22,10 +22,13 @@ jobs:
       - name: Build app web
         run: flutter build web --release --base-href /
 
+      - name: Build landing web
+        run: flutter build web --release -t lib/landing_main.dart --base-href /Landing_page/ --output build/landing_web
+
       - name: Package landing site
         run: |
           mkdir -p build/web/Landing_page
-          cp web/Landing_page/index.html build/web/Landing_page/index.html
+          cp -R build/landing_web/* build/web/Landing_page/
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
